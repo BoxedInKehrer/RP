@@ -34,7 +34,6 @@ from sklearn.neural_network import MLPClassifier
 from sklearn.naive_bayes import GaussianNB
 
 from A_record_win import MODEL_NAME, BASE_DIR, SOUND_NAME
-# MODEL_NAME = "lndw2022_sweep_1s"
 
 # ==================
 # USER SETTINGS
@@ -95,11 +94,6 @@ def sound_to_spectrum(sound):
     series = pandas.Series(amplitude_spectrum, index=index)
     return series
 
-# def sound_to_spectrum_stft(audio, n_fft=4096, in_dB=False):
-#     stft = librosa.stft(audio, n_fft=n_fft)
-#     spectrum = numpy.abs(stft).mean(axis=1)
-#     return spectrum
-
 def sound_to_spectrum_stft(sound, n_fft=CHUNK, in_dB=False):
     spectrogram = numpy.abs(librosa.stft(sound, n_fft=n_fft))
     spectrum = spectrogram.sum(axis=1)
@@ -149,12 +143,12 @@ def main():
 
     classifiers = {
         "KNN": KNeighborsClassifier(),
-        "Decision Tree": DecisionTreeClassifier(random_state=42),
-        "Random Forest": RandomForestClassifier(n_estimators=100, random_state=42),
-        "SVM": SVC(kernel='linear', C=1.0, random_state=42),
-        "Logistic Regression": LogisticRegression(max_iter=1000, random_state=42),
-        "Gradient Boosting": GradientBoostingClassifier(n_estimators=100, learning_rate=0.1, random_state=42),
-        "Neural Network": MLPClassifier(hidden_layer_sizes=(100,), max_iter=1000, random_state=42),
+        # "Decision Tree": DecisionTreeClassifier(random_state=42),
+        "Random Forest": RandomForestClassifier(n_estimators=100, random_state=1337),
+        "SVM": SVC(kernel='linear', C=1.0, probability=True, random_state=1337),
+        "Logistic Regression": LogisticRegression(max_iter=1000, random_state=1337),
+        "Gradient Boosting": GradientBoostingClassifier(n_estimators=100, learning_rate=0.1, random_state=1337),
+        "Neural Network": MLPClassifier(hidden_layer_sizes=(100,), max_iter=1000, random_state=1337),
         "Naive Bayes": GaussianNB(),
     }
 
@@ -195,40 +189,6 @@ def main():
     if SHOW_PLOTS:
         pyplot.pause(0.1)
         pyplot.show()
-
-    # print("Running for model '{}'".format(MODEL_NAME))
-    # global DATA_DIR
-    # DATA_DIR = os.path.join(BASE_DIR, MODEL_NAME)
-
-    # sounds, labels = load_sounds(DATA_DIR)
-    # # spectra = [sound_to_spectrum(sound) for sound in sounds]
-    # spectra = [sound_to_spectrum_stft(sound) for sound in sounds]
-    # classes = list(set(labels))
-
-    # if SHOW_PLOTS:
-    #     plot_spectra(spectra, labels)
-
-    # if TEST_SIZE > 0:
-    #     X_train, X_test, y_train, y_test = train_test_split(spectra, labels, test_size=TEST_SIZE)
-    # else:
-    #     X_train, y_train = (spectra, labels)
-
-    # clf = KNeighborsClassifier()  # using default KNN classifier
-    # clf.fit(X_train, y_train)
-    # train_score = clf.score(X_train, y_train)
-    # print("Fitted sensor model to data!")
-    # print("Training score: {:.2f}".format(train_score))
-
-    # if TEST_SIZE > 0:
-    #     test_score = clf.score(X_test, y_test)
-    #     print("Test score: {:.2f}".format(test_score))
-
-    # save_sensor_model(DATA_DIR, clf, SENSORMODEL_FILENAME)
-    # print("\nSaved model to '{}'".format(os.path.join(DATA_DIR, SENSORMODEL_FILENAME)))
-
-    # if SHOW_PLOTS:
-    #     pyplot.pause(0.1)
-    #     pyplot.show()
 
 
 if __name__ == "__main__":
