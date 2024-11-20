@@ -1,0 +1,7 @@
+librosa
+numpy
+matplotlib
+pandas>=0.20.2
+scikit-learn>=0.20.0
+jacktools~=1.0.1  # install via pip install zita-tools/zita-jacktools
+scipy
