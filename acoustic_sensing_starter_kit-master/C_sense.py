@@ -11,7 +11,7 @@ from scipy.signal import chirp
 # Settings
 SR = 48000
 CHUNK = 1024
-MODEL_PATH = r"C:\Users\Kehre\OneDrive\Desktop\WS25\RP\acoustic_sensing_starter_kit-master\lndw2022_sweep_1s\sensor_model.pkl"
+MODEL_PATH = r"acoustic_sensing_starter_kit-master\\lndw2022_sweep_1s\\sensor_model.pkl"
 AMPLIFICATION_FACTOR = 10**(47 / 20)  # Convert 47 dB to linear scale
 SWEEP_SOUND = chirp(np.linspace(0, 1, SR), f0=100, f1=10000, t1=1, method='linear').astype('float32')
 

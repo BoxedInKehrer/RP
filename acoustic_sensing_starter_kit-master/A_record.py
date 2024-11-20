@@ -15,7 +15,7 @@ import threading
 # ==================
 # USER SETTINGS
 # ==================
-BASE_DIR = "."
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 SOUND_NAME = "sweep"
 CLASS_LABELS = ["metal", "desk"]
 SAMPLES_PER_CLASS = 10

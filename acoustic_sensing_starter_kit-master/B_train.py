@@ -33,12 +33,11 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.neural_network import MLPClassifier
 from sklearn.naive_bayes import GaussianNB
 
-from A_record_win import MODEL_NAME, BASE_DIR, SOUND_NAME
+from A_record import MODEL_NAME, BASE_DIR, SOUND_NAME
 
 # ==================
 # USER SETTINGS
 # ==================
-BASE_DIR = "."
 SENSORMODEL_FILENAME = "sensor_model.pkl"
 TEST_SIZE = 0.2  # percentage of samples left out of training and used for reporting test score
 SHOW_PLOTS = True
