@@ -30,7 +30,7 @@ CHUNK = 1024
 
 AMPLIFICATION_FACTOR = 10**(47 / 20)  # Convert 47 dB to linear scale
 
-#! the microphone has a range of 100Hz to 10kHz, so no point in going beyond that
+#! the microphone has a range of 100Hz to 10kHz, so no point in going beyond that?
 SOUNDS = {
     "sweep": chirp(np.linspace(0, 1, SR), f0=100, f1=10000, t1=1, method='linear').astype('float32'),
     "white_noise": np.random.uniform(low=-0.999, high=1.0, size=(SR)).astype('float32'),

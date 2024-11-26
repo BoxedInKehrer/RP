@@ -76,22 +76,22 @@ def load_sounds(path):
             global SOUND_NAME
             SOUND_NAME = label
         else:
-            sound = librosa.load(os.path.join(path, fn), sr=SR)[0]
+            sound = librosa.load(os.path.join(path, fn), sr=SR)[0]  #! amplitudes normalized to [-1,1]
             sounds.append(sound)
             labels.append(label)
     print(f"Loaded **{len(sounds)}** sounds with \nlabels: {sorted(set(labels))}")
     return sounds, labels
 
 
-def sound_to_spectrum(sound):
-    """Convert sounds to frequency spectra"""
-    spectrum = numpy.fft.rfft(sound)
-    amplitude_spectrum = numpy.abs(spectrum)
-    d = 1.0/SR
-    freqs = numpy.fft.rfftfreq(len(sound), d)
-    index = pandas.Index(freqs)
-    series = pandas.Series(amplitude_spectrum, index=index)
-    return series
+# def sound_to_spectrum(sound):
+#     """Convert sounds to frequency spectra"""
+#     spectrum = numpy.fft.rfft(sound)
+#     amplitude_spectrum = numpy.abs(spectrum)
+#     d = 1.0/SR
+#     freqs = numpy.fft.rfftfreq(len(sound), d)
+#     index = pandas.Index(freqs)
+#     series = pandas.Series(amplitude_spectrum, index=index)
+#     return series
 
 def sound_to_spectrum_stft(sound, n_fft=CHUNK, in_dB=False):
     spectrogram = numpy.abs(librosa.stft(sound, n_fft=n_fft))
